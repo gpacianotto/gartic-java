@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +30,7 @@ public class PaintPanelServer extends JPanel implements Runnable{
     private ServerSocket server;
     private Socket connection;
     private final String resposta = "relógio";
+    private String palpite;
     
     
     public PaintPanelServer()
@@ -94,16 +96,32 @@ public class PaintPanelServer extends JPanel implements Runnable{
         System.out.println("IOStreams obtidos!");
     }
     
+    private void setPalpite(String palpite)
+    {
+        this.palpite = palpite;
+    }
+    
     private void processConnection() throws IOException
     {
         String message = "";
         System.out.println("conexão bem sucedida");
-        sendData(points.get(points.size() - 1));
+        //sendData(points.get(points.size() - 1));
         
         do{
             try{
                 message = (String)input.readObject();
+                setPalpite(message);
                 System.out.println("mensagem: "+message);
+                if(this.palpite == null ? this.resposta == null : this.palpite.equals(this.resposta))
+                {
+                    if (JOptionPane.showConfirmDialog(null, "Você Venceu!!", "WARNING",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    } else {
+                        System.exit(0);
+                    }
+                }
+                
             }
             catch(ClassNotFoundException ex)
             {
@@ -160,7 +178,7 @@ public class PaintPanelServer extends JPanel implements Runnable{
         }
         catch(Exception e)
         {
-            System.out.println("erro");
+            System.out.println("erro: "+e.getMessage());
         }
         
     }
