@@ -1,5 +1,7 @@
 # gartic-java
 
-Já foi implementadas as threads + funcionalidade de desenho espelhado
+Implementado com Threads!
 
-falta o input do Client side para tentar acertar a resposta
+Professor, por vaor configure a resposta desejada na constante "resposta" definida na classe PaintPanelServer:
+
+![image](https://user-images.githubusercontent.com/43755420/177901231-9b3ecf11-c0d2-4947-8538-f2e8dd49d0b6.png)
